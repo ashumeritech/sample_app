@@ -3,6 +3,12 @@ import './App.css';
 
 const App : React.FC = ()  => {
 
+  interface Employee {
+    id: number;
+    name: string;
+    position: string;
+  }
+
   let employee : Array<Employee> = [
     { id: 1, name: "Meritech1", position: "Software Engineer"},
     { id: 2, name: "Meritech2", position: "Product Engineer" },
@@ -16,13 +22,6 @@ const App : React.FC = ()  => {
       return Employees.filter(e=>e.id!==id);
     });
   };
- 
-
- interface Employee {
-    id: number;
-    name: string;
-    position: string;
-  }
   
   // Generate unique employee ID
   let nextId : number = employees.length + 1;
@@ -32,7 +31,7 @@ const App : React.FC = ()  => {
     return (
       <div>
         <h2>Employee List</h2>
-        <ul>
+        <ul style={{listStyleType:"none"}}>
           {employees.map((employee:Employee) => (
             <li key={employee.id}>
               {employee.name} - {employee.position}
@@ -46,8 +45,8 @@ const App : React.FC = ()  => {
   
   // Component for adding a new employee
   const AddEmployee: React.FC = () => {
-    const [name, setName] = React.useState("");
-    const [position, setPosition] = React.useState("");
+    const [name, setName] = React.useState<string>("");
+    const [position, setPosition] = React.useState<string>("");
   
     const handleSubmit = () => {
       const newEmployee: Employee = { id: nextId++, name, position };
@@ -79,10 +78,12 @@ const App : React.FC = ()  => {
   };
   
   return (
-    <div>
+    <div className="background">
+      <div className="App">
       <h1>Employee Management</h1>
-      <EmployeeList />
+      <EmployeeList/>
       <AddEmployee />
+      </div>
     </div>
   );
 
